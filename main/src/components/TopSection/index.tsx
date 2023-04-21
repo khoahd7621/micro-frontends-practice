@@ -1,15 +1,27 @@
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { mountRemoteComponent } from '@/utils/loadComponent';
-import CategoryMenu from './CategoryMenu';
-import Search from './Search';
+import { mountRemoteComponent } from "@/utils/loadComponent";
+import CategoryMenu from "./CategoryMenu";
+import Search from "./Search";
 
 const TopSection = () => {
+  const navigate = useNavigate();
+
   const heroBannerProps = {
-    title: 'FRESH FRUIT',
-    content: 'Vegetable <br/>100% Organic',
-    buttonTitle: 'SHOP NOW',
-    description: 'Free Pickup and Delivery Available'
+    title: "FRESH FRUIT",
+    content: "Vegetable <br/>100% Organic",
+    buttonTitle: "SHOP NOW",
+    description: "Free Pickup and Delivery Available",
+    Button: (
+      <a
+        onClick={() => navigate("/shop")}
+        style={{ color: "#fff" }}
+        className="primary-btn"
+      >
+        SHOP NOW
+      </a>
+    ),
   };
 
   return (
@@ -32,8 +44,8 @@ const TopSection = () => {
               </div>
             </div>
           </div>
-          <div className='hero__item set-bg'>
-            {mountRemoteComponent({ module: 'shared', component: 'HeroBanner', props: heroBannerProps })}
+          <div className="hero__item set-bg">
+            {mountRemoteComponent({ module: "shared", component: "HeroBanner", props: heroBannerProps })}
           </div>
         </div>
       </div>
