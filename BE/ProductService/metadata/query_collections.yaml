@@ -29,6 +29,7 @@
         query: |
           query MyQuery ($isFeatured: Boolean = true, $limit: Int = 8) {
           	product(where: {is_featured:{_eq:$isFeatured}}, limit: $limit) {
+          		id
           		name
           		price
           		list_img(limit: 1) {
