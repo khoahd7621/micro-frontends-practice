@@ -103,6 +103,9 @@
           			id
           			price
           			slug
+          			list_img {
+          				url
+          			}
           		}
           	}
           }
