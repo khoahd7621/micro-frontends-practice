@@ -5,10 +5,18 @@
         <div class="col-lg-6 col-md-6">
           <div class="product__details__pic">
             <div class="product__details__pic__item">
-              <Image :src="item.list_img?.[0]?.url" class-name="product__details__pic__item--large" />
+              <Image
+                :src="item.list_img?.[0]?.url"
+                class-name="product__details__pic__item--large"
+              />
             </div>
             <div class="product__details__pic__slider owl-carousel">
-              <Image v-for="image in item.list_img" :key="image.id" :src="image.url" @click="zoomImage(image.url)" />
+              <Image
+                v-for="image in item.list_img"
+                :key="image.id"
+                :src="image.url"
+                @click="zoomImage(image.url)"
+              />
             </div>
           </div>
         </div>
@@ -30,7 +38,7 @@
                 </div>
               </div>
             </div>
-            <a href="#" class="primary-btn">ADD TO CARD</a>
+            <a @click="addToCart(item)" class="primary-btn">ADD TO CARD</a>
             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
             <ul>
               <li>
@@ -66,15 +74,24 @@
             <!-- Bootstrap Dynamic Tabs -->
             <ul class="nav nav-tabs" role="tablist">
               <li class="nav-item" v-for="tab in tabs" :key="tab.name">
-                <a :class="[
-                  'nav-link text-capitalize',
-                  active === tab.name ? 'active' : '',
-                ]" data-toggle="tab" role="tab" @click="active = tab.name" aria-selected="true">{{ tab.name }}</a>
+                <a
+                  :class="['nav-link text-capitalize', active === tab.name ? 'active' : '']"
+                  data-toggle="tab"
+                  role="tab"
+                  @click="active = tab.name"
+                  aria-selected="true"
+                  >{{ tab.name }}</a
+                >
               </li>
             </ul>
             <div class="tab-content">
-              <div v-show="active === tab.name" v-for="tab in tabs" :key="tab.name" :class="['tab-pane active']"
-                role="tabpanel">
+              <div
+                v-show="active === tab.name"
+                v-for="tab in tabs"
+                :key="tab.name"
+                :class="['tab-pane active']"
+                role="tabpanel"
+              >
                 <div class="product__details__tab__desc">
                   <h6>Products {{ tab.name }}</h6>
                   <p>{{ item[tab.name] }}</p>
@@ -88,9 +105,10 @@
   </section>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
 import API from "@/api";
+import globalStorage, { IItemCart } from "@/utils/loadStorage";
 import Image from "@components/Image/index.vue";
+import { defineComponent } from "vue";
 //@ts-ignore
 import { IProduct } from "@components/Product/product.type.ts";
 
@@ -158,11 +176,21 @@ export default defineComponent({
           chatData: {
             show: true,
             item: this.item,
-          }
+          },
         },
       });
       document.body.dispatchEvent(chatDataEvent);
-    }
+    },
+    addToCart(item: any) {
+      const data: IItemCart = {
+        id: item.id,
+        title: item.name,
+        qty: 1,
+        price: item.price,
+        img: item.list_img?.[0].url || require("@/assets/img/default.png"),
+      };
+      globalStorage.addItemToCart(data);
+    },
   },
 });
 </script>
