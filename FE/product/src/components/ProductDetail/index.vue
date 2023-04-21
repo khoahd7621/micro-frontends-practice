@@ -38,7 +38,9 @@
                 </div>
               </div>
             </div>
-            <a @click="addToCart(item)" class="primary-btn">ADD TO CARD</a>
+            <a @click="addToCart(item)" class="primary-btn" :style="{ color: 'white' }"
+              >ADD TO CARD</a
+            >
             <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
             <ul>
               <li>

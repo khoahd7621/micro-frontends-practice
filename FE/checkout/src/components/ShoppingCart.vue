@@ -51,8 +51,16 @@
           <div class="shoping__discount">
             <h5>Discount Codes</h5>
             <form>
-              <input type="text" placeholder="Enter your coupon code" />
-              <button type="submit" class="site-btn">APPLY COUPON</button>
+              <input
+                type="text"
+                placeholder="Enter your coupon code"
+              />
+              <button
+                type="submit"
+                class="site-btn"
+              >
+                APPLY COUPON
+              </button>
             </form>
           </div>
         </div>
@@ -68,7 +76,11 @@
               Total <span>{{ cartData.grandTotal.toFixed(2) }}</span>
             </li>
           </ul>
-          <a class="primary-btn" @click="navigateToCheckOut">
+          <a
+            class="primary-btn"
+            @click="navigateToCheckOut"
+            :style="{ color: 'white' }"
+          >
             PROCEED TO CHECKOUT
           </a>
         </div>
