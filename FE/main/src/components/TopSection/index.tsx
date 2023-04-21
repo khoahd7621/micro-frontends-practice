@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { mountRemoteComponent } from "@/utils/loadComponent";
 import CategoryMenu from "./CategoryMenu";
@@ -7,6 +7,7 @@ import Search from "./Search";
 
 const TopSection = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const heroBannerProps = {
     title: "FRESH FRUIT",
@@ -28,7 +29,7 @@ const TopSection = () => {
     <section className="hero">
       <div className="row">
         <div className="col-lg-3">
-          <CategoryMenu />
+          <CategoryMenu categoryId={Number(searchParams.get("category"))} />
         </div>
         <div className="col-lg-9">
           <div className="hero__search">

@@ -1,29 +1,34 @@
-import React from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { mountRemoteComponent } from "@/utils/loadComponent";
 
-const CategoryMemu = () => {
+interface CategoryMemuProps {
+  categoryId: number;
+}
+
+const CategoryMemu = ({ categoryId }: CategoryMemuProps) => {
+  const navigate = useNavigate();
   const onMenuClick = () => {
-    $('.hero__categories ul').slideToggle(400);
+    $(".hero__categories ul").slideToggle(400);
   };
 
   return (
     <div className="hero__categories">
-      <div className="hero__categories__all" onClick={onMenuClick}>
+      <div
+        className="hero__categories__all"
+        onClick={onMenuClick}
+      >
         <i className="fa fa-bars" />
         <span>All Departments</span>
       </div>
-      <ul>
-        <li><a href="#">Fresh Meat</a></li>
-        <li><a href="#">Vegetables</a></li>
-        <li><a href="#">Fruit & Nut Gifts</a></li>
-        <li><a href="#">Fresh Berries</a></li>
-        <li><a href="#">Ocean Foods</a></li>
-        <li><a href="#">Butter & Eggs</a></li>
-        <li><a href="#">Fastfood</a></li>
-        <li><a href="#">Fresh Onion</a></li>
-        <li><a href="#">Papayaya & Crisps</a></li>
-        <li><a href="#">Oatmeal</a></li>
-        <li><a href="#">Fresh Bananas</a></li>
-      </ul>
+      {mountRemoteComponent({
+        module: "product",
+        component: "CategoryList",
+        props: {
+          navigate,
+          categoryId,
+        },
+      })}
     </div>
   );
 };
